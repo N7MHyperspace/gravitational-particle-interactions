@@ -2,3 +2,4 @@ pyecore
 moderngl
 moderngl-window
 glfw
+pathlib
