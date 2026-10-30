@@ -1,13 +1,32 @@
 from moderngl_window.context.base.window import WindowConfig
+from moderngl_window import resources
 import moderngl as mgl
 from pathlib import Path
 
+from moderngl_window.resources import (
+    textures,
+    programs,
+    scenes,
+    data,
+)
+
+from moderngl_window.meta import (
+    TextureDescription,
+    ProgramDescription,
+    SceneDescription,
+    DataDescription,
+)
+
+resources.register_dir(Path(__file__).parent / 'resource')
+resources.register_dir(Path(__file__).parent / 'resource' / 'shader')
+
 class Main(WindowConfig):
     gl_version = (3, 3)
-    resource_dir = (Path(__file__).parent / 'ressource').resolve()
 
     def __init__(self, **kwargs): # type: ignore
         super().__init__(**kwargs) # type: ignore 
+
+        self.prog = programs.load(ProgramDescription(vertex_shader='vertex1.vert', fragment_shader='frag1.frag'))
 
     def on_render(self, time: float, frame_time: float):
         self.ctx.clear(1.0, 0.0, 0.0, 0.0)
