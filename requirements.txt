@@ -3,3 +3,4 @@ moderngl
 moderngl-window
 glfw
 pathlib
+numpy
