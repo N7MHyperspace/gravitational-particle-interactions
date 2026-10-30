@@ -1,2 +1,3 @@
 pyecore
 moderngl
+moderngl-window
