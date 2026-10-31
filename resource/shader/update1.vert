@@ -15,7 +15,10 @@ vec2 force(vec2 pos) {
 }
 
 void main() {
-    vec2 acc = force(in_cpos);
+    vec2 f = vec2(0.0, 0.0);
+    f += force(in_cpos - vec2(1.0, 0.0));
+    f += force(in_cpos - vec2(-1.0, 0.0));
+    vec2 acc = f;
     out_cpos = 2.0 * in_cpos - in_ppos + acc * dt * dt;
     out_ppos = in_cpos;
 }

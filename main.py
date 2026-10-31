@@ -34,17 +34,17 @@ class Main(WindowConfig):
         self.up_prog = programs.load(ProgramDescription(vertex_shader='update1.vert', varyings=["out_cpos", "out_ppos"]))
 
 
-        n = 500000
+        n = 5000000
         # positions
 
 
         # velocities
-        a = np.random.rand(n) * 2.0 * np.pi
-        r = 0.5 + np.random.rand(n) * 0.1
+        a = np.random.rand(n) * 2.0 * np.pi * 1.0
+        r = 0.25 + np.random.rand(n) * 0.001
         x = np.cos(a) * r
         y = np.sin(a) * r
-        v = 0.01 + np.random.rand(n) * 0.02
-        a += np.random.rand(n) * 2.0 * np.pi * 0.2
+        v = (1.0 + np.random.rand(n) * 0.1) * 0.01
+        a += np.random.rand(n) * 2.0 * np.pi * 0.01
         vx = np.sin(a) * v
         vy = -np.cos(a) * v
 
@@ -69,7 +69,7 @@ class Main(WindowConfig):
         self.up_vao_b = self.ctx.simple_vertex_array(self.up_prog, self.up_vbo_b, 'in_cpos', 'in_ppos')
 
         self.rp_vbo = self.ctx.buffer(particle_color.astype('f4').tobytes())
-        self.rp_vao = self.ctx.vertex_array(self.rp_prog, [(self.up_vbo_a, '2f 2f', 'in_cpos', 'in_ppos'), (self.rp_vbo, '3f', 'in_color')])
+        self.rp_vao = self.ctx.vertex_array(self.rp_prog, [(self.up_vbo_a, '2f 2f', 'in_cpos', 'in_ppos'), (self.rp_vbo, '3f', 'in_color')]) # type: ignore
 
         self.cam_x = 0.0
         self.cam_y = 0.0
